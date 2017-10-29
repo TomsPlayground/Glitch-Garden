@@ -3,25 +3,17 @@ using System.Collections;
 
 public class LevelManager : MonoBehaviour {
 
-    private float timer;
-    private float timerLimit = 5f;
+    public float timer;
 
     void Start()
     {
-        Invoke("LoadNextLevel", timerLimit);
-        timer = timerLimit;
-        InvokeRepeating("CheckTimer", 1f, 1f);
-    }
-
-    void CheckTimer()
-    {
-        timer -= 1f;
-        Debug.Log("Load start screen in: " + timer + " seconds");
         if (timer == 0)
         {
-            CancelInvoke("CheckTimer");
-            Invoke("LoadNextLevel", timerLimit);
-            Application.LoadLevel("Start Menu");
+            Debug.Log("Level auto load disabled");
+        }
+        else
+        {
+            Invoke("LoadNextLevel", timer);
         }
     }
 
@@ -35,4 +27,8 @@ public class LevelManager : MonoBehaviour {
 		Application.Quit ();
 	}
 
+    public void LoadNextLevel()
+    {
+        Application.LoadLevel(Application.loadedLevel + 1);
+    }
 }

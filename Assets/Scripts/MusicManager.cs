@@ -6,20 +6,34 @@ public class MusicManager : MonoBehaviour {
 
     public AudioClip[] levelMusicChangeArray;
 
-    private int currentSceneIndexNumber;
+    private AudioSource backgroundMusic;
 
-    // Use this for initialization
-    void Start () {
-        SceneManager.GetActiveScene().buildIndex;
+    void Awake() {
+        DontDestroyOnLoad(gameObject);
+        Debug.Log("Don't destroy on load");
     }
-	
-	// Update is called once per frame
-	void Update () {
-        int currentSceneIndexNumber = SceneManager.GetActiveScene();
 
-        if(levelMusicChangeArray[1])
+    void Start()
+    {
+        backgroundMusic = GetComponent<AudioSource>();
+        AudioClip splashScreenMusic = levelMusicChangeArray[0];
+        backgroundMusic.clip = splashScreenMusic;
+        backgroundMusic.loop = false;
+        backgroundMusic.Play();
+        Debug.Log("Now playing without loop: " + splashScreenMusic);
+    }
+
+    void OnLevelWasLoaded(int levelIndex)
+    {
+        AudioClip thisLevelMusic = levelMusicChangeArray[levelIndex];
+        Debug.Log("Playing clip " + thisLevelMusic);
+
+        if (thisLevelMusic)
         {
-            audio.Play();
+            backgroundMusic.clip = thisLevelMusic;
+            backgroundMusic.loop = true;
+            backgroundMusic.Play();
+            Debug.Log("Now playing with loop: " + thisLevelMusic);
         }
     }
 }
