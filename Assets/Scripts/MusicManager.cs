@@ -6,6 +6,7 @@ public class MusicManager : MonoBehaviour {
 
     public AudioClip[] levelMusicChangeArray;
 
+    private float mySliderValue;
     private AudioSource backgroundMusic;
 
     void Awake() {
@@ -15,7 +16,9 @@ public class MusicManager : MonoBehaviour {
 
     void Start()
     {
+        mySliderValue = 0.2f;
         backgroundMusic = GetComponent<AudioSource>();
+        backgroundMusic.volume = PlayerPrefsManager.GetMasterVolume();
         AudioClip splashScreenMusic = levelMusicChangeArray[0];
         backgroundMusic.clip = splashScreenMusic;
         backgroundMusic.loop = false;
@@ -35,5 +38,10 @@ public class MusicManager : MonoBehaviour {
             backgroundMusic.Play();
             Debug.Log("Now playing with loop: " + thisLevelMusic);
         }
+    }
+
+    public void SetVolume(float thisVolume)
+    {
+        backgroundMusic.volume = thisVolume;
     }
 }
