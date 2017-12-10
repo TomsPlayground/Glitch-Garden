@@ -11,7 +11,7 @@ public class MusicManager : MonoBehaviour {
 
     void Awake() {
         DontDestroyOnLoad(gameObject);
-        Debug.Log("Don't destroy on load");
+        //Debug.Log("Don't destroy on load");
     }
 
     void Start()
@@ -23,7 +23,7 @@ public class MusicManager : MonoBehaviour {
         backgroundMusic.clip = splashScreenMusic;
         backgroundMusic.loop = false;
         backgroundMusic.Play();
-        Debug.Log("Now playing without loop: " + splashScreenMusic);
+        //Debug.Log("Now playing without loop: " + splashScreenMusic);
     }
 
     void OnLevelWasLoaded(int levelIndex)
@@ -36,7 +36,7 @@ public class MusicManager : MonoBehaviour {
             backgroundMusic.clip = thisLevelMusic;
             backgroundMusic.loop = true;
             backgroundMusic.Play();
-            Debug.Log("Now playing with loop: " + thisLevelMusic);
+            //Debug.Log("Now playing with loop: " + thisLevelMusic);
         }
     }
 
